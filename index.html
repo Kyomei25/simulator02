@@ -95,7 +95,7 @@
     }
     /* PC用各入力固定幅 */
     #retirement-start-age, #retirement-end-age { width: 200px; }
-    #final-assets, #operating-rate { width: 200px; }
+    #final-assets { width: 200px; }
     #annual-rate-1, #withdrawal-1 { width: 200px; }
     .chart-container { position: relative; margin-bottom: 10px; }
     .input-overlay { margin-top: 20px; padding: 0 20px; }
@@ -173,7 +173,7 @@
       .results, .inputs { width: 95%; padding: 15px; }
       .input-overlay .row { flex-direction: column; gap: 10px; }
       .left-item, .right-item { margin: 0; text-align: left; }
-      #retirement-start-age, #retirement-end-age, #final-assets, #operating-rate, #annual-rate-1, #withdrawal-1 {
+      #retirement-start-age, #retirement-end-age, #final-assets, #annual-rate-1, #withdrawal-1 {
         width: 100px;
       }
       .input-wrapper input[type="number"],
@@ -232,7 +232,7 @@
     <!-- タイトル -->
     <img src="title.webp" alt="老後資金シミュレーター" style="width:100%; height:auto;">
     
-    <!-- STEP1 -->
+    <!-- STEP1：基本入力 -->
     <div class="step-container step1">
       <div class="step-indicator">
         <img class="step-image" src="step1.png" alt="STEP 1">
@@ -242,7 +242,6 @@
     
     <!-- 結果エリア -->
     <div class="results">
-      <!-- シミュレーション結果 -->
       <p id="result-display">結果表示</p>
       
       <!-- グラフエリア -->
@@ -288,7 +287,7 @@
             <div class="left-item">
               <label for="withdrawal-1">積立月額</label>
               <div class="input-wrapper">
-                <!-- パターン１の場合：積立月額入力、想定利回りは未入力 -->
+                <!-- パターン１：積立月額入力（想定利回り未入力なら逆算対象） -->
                 <input type="number" id="withdrawal-1" placeholder="例：5">
                 <span class="input-suffix">万円/月</span>
               </div>
@@ -301,17 +300,7 @@
               </div>
             </div>
           </div>
-          <!-- 新規追加：運用金利入力欄 -->
-          <div class="row">
-            <div class="full-item">
-              <label for="operating-rate">運用金利</label><br class="desktop-only">
-              <div class="input-wrapper">
-                <input type="number" id="operating-rate" placeholder="例：3" required>
-                <span class="input-suffix">％</span>
-              </div>
-            </div>
-          </div>
-          <!-- パターン２の場合：想定利回り入力 -->
+          <!-- 想定利回り（パターン２：積立月額未入力なら逆算対象） -->
           <div class="row">
             <div class="full-item">
               <label for="annual-rate-1">想定利回り</label><br class="desktop-only">
@@ -327,7 +316,7 @@
       <button id="calculate" class="c-button _shiny">シミュレーション開始</button>
     </div>
     
-    <!-- STEP2（オプション項目） -->
+    <!-- STEP2：その他オプション -->
     <div class="step-container step2">
       <div class="step-indicator">
         <img class="step-image" src="step2.png" alt="STEP 2">
@@ -335,7 +324,7 @@
       <div class="step-description">その他の項目（オプション）は下記へ</div>
     </div>
     
-    <!-- オプション入力エリア（従来項目＋金利・積立額の変更、及び一括投資） -->
+    <!-- オプション入力エリア -->
     <div class="inputs">
       <!-- 金利・積立額の変更 -->
       <h4>金利・積立額の変更</h4>
@@ -346,31 +335,33 @@
       </div>
       <div class="field-group">
         <span class="field-label">変更後の積立月額</span>
-        <input type="number" id="new-withdrawal" class="card-input" placeholder="10">
+        <input type="number" id="new-withdrawal" class="card-input" placeholder="例：10">
         <span class="field-unit">万円</span>
       </div>
       <div class="field-group">
-        <span class="field-label">想定年利</span>
-        <input type="number" id="new-annual-rate" class="card-input" placeholder="5">
+        <span class="field-label">変更後の想定年利</span>
+        <input type="number" id="new-annual-rate" class="card-input" placeholder="例：5">
         <span class="field-unit">％</span>
       </div>
       <hr>
       <!-- 一括投資（既存項目） -->
       <h4>一括投資</h4>
-      <p>一括投資とは、特定の年齢で一度に資金を投資する方法です。</p>
+      <p>一括投資とは、指定した年齢で一括で投資する方法です。<br>
+         ※この項目は自動的に現在年齢が設定されます。</p>
       <div class="field-group">
         <span class="field-label">年齢</span>
+        <!-- 自動設定：後述 runSimulation() 内で現在年齢をセット -->
         <select id="lump-investment-age" class="card-input"></select>
         <span class="field-unit">歳</span>
       </div>
       <div class="field-group">
         <span class="field-label">金額</span>
-        <input type="number" id="lump-investment-amount" class="card-input" placeholder="50">
+        <input type="number" id="lump-investment-amount" class="card-input" placeholder="例：50">
         <span class="field-unit">万円</span>
       </div>
-      <!-- 追加の一括投資項目 -->
-      <h4>一括投資</h4>
-      <p>一括投資とは、特定の年齢で一度に資金を投資する方法です。（追加項目）</p>
+      <!-- 追加の一括投資項目（2件目） -->
+      <h4>一括投資（追加）</h4>
+      <p>一括投資（追加）：指定した年齢で一括で投資する方法です。</p>
       <div class="field-group">
         <span class="field-label">年齢</span>
         <select id="lump-investment2-age" class="card-input"></select>
@@ -378,7 +369,7 @@
       </div>
       <div class="field-group">
         <span class="field-label">金額</span>
-        <input type="number" id="lump-investment2-amount" class="card-input" placeholder="50">
+        <input type="number" id="lump-investment2-amount" class="card-input" placeholder="例：50">
         <span class="field-unit">万円</span>
       </div>
       <button id="calculate2" class="c-button _shiny">シミュレーション開始</button>
@@ -394,8 +385,8 @@
           var option = document.createElement("option");
           option.value = i;
           option.textContent = i;
-          if (defaultVal !== undefined && i === defaultVal) { 
-            option.selected = true; 
+          if (defaultVal !== undefined && i === defaultVal) {
+            option.selected = true;
           }
           selectElem.appendChild(option);
         }
@@ -407,15 +398,27 @@
       populateSelect("lump-investment2-age", 60);
     });
     
-    // 前向きシミュレーション関数（変更前後のパラメータに応じた複利計算）
-    function simulate(depositBase, rateBase, depositNew, rateNew, switchingMonth, totalMonths) {
+    // 前向きシミュレーション関数
+    // depositBase, rateBase: 変更前の積立額・年率
+    // depositNew, rateNew: 変更後の積立額・年率
+    // switchingMonth: 変更する年齢（月数換算）
+    // totalMonths: 全期間の月数
+    // lumpMonth1, lumpAmt1, lumpMonth2, lumpAmt2: 一括投資の実施月と金額（各項目）
+    function simulate(depositBase, rateBase, depositNew, rateNew, switchingMonth, totalMonths, lumpMonth1, lumpAmt1, lumpMonth2, lumpAmt2) {
       var asset = 0;
       for (var m = 0; m < totalMonths; m++) {
+        // 一括投資の追加
+        if (!isNaN(lumpMonth1) && m === lumpMonth1) { asset += lumpAmt1; }
+        if (!isNaN(lumpMonth2) && m === lumpMonth2) { asset += lumpAmt2; }
+        var currentMonthlyRate, currentDeposit;
         if (m < switchingMonth) {
-          asset = asset * (1 + (rateBase/100)/12) + depositBase;
+          currentMonthlyRate = (rateBase / 100) / 12;
+          currentDeposit = depositBase;
         } else {
-          asset = asset * (1 + (rateNew/100)/12) + depositNew;
+          currentMonthlyRate = (rateNew / 100) / 12;
+          currentDeposit = depositNew;
         }
+        asset = asset * (1 + currentMonthlyRate) + currentDeposit;
       }
       return asset;
     }
@@ -426,9 +429,8 @@
         var currentAge = parseFloat(document.getElementById("retirement-start-age").value);
         var retirementAge = parseFloat(document.getElementById("retirement-end-age").value);
         var finalAssets = parseFloat(document.getElementById("final-assets").value);
-        var operatingRate = parseFloat(document.getElementById("operating-rate").value);
-        if (isNaN(currentAge) || isNaN(retirementAge) || isNaN(finalAssets) || isNaN(operatingRate)) {
-          alert("必須項目（現在年齢、老後開始年齢、老後開始時保有額、運用金利）を正しく入力してください。");
+        if (isNaN(currentAge) || isNaN(retirementAge) || isNaN(finalAssets)) {
+          alert("必須項目（現在年齢、老後開始年齢、老後開始時保有額）を正しく入力してください。");
           return;
         }
         if (retirementAge <= currentAge) {
@@ -441,7 +443,7 @@
         var changeAgeStr = document.getElementById("change-age").value;
         var newWithdrawalStr = document.getElementById("new-withdrawal").value;
         var newAnnualRateStr = document.getElementById("new-annual-rate").value;
-        var switchingMonth = totalMonths; // デフォルトは変更なし
+        var switchingMonth = totalMonths; // 変更なしの場合
         if(changeAgeStr !== "" && !isNaN(parseFloat(changeAgeStr))) {
           var changeAge = parseFloat(changeAgeStr);
           switchingMonth = Math.round((changeAge - currentAge) * 12);
@@ -449,12 +451,32 @@
           if(switchingMonth > totalMonths) switchingMonth = totalMonths;
         }
         
-        // 積立月額と想定利回りの入力状況チェック
+        // 一括投資の入力取得（既存項目）  
+        // 自動的に「現在の年齢」を設定する
+        document.getElementById("lump-investment-age").value = currentAge;
+        var lumpAge1Str = document.getElementById("lump-investment-age").value;
+        var lumpAmount1Str = document.getElementById("lump-investment-amount").value;
+        var lumpMonth1 = NaN, lumpAmt1 = 0;
+        if(lumpAge1Str !== "" && !isNaN(parseFloat(lumpAge1Str)) &&
+           lumpAmount1Str !== "" && !isNaN(parseFloat(lumpAmount1Str))) {
+          lumpMonth1 = Math.round((parseFloat(lumpAge1Str) - currentAge) * 12);
+          lumpAmt1 = parseFloat(lumpAmount1Str);
+        }
+        // 一括投資の入力取得（追加項目）
+        var lumpAge2Str = document.getElementById("lump-investment2-age").value;
+        var lumpAmount2Str = document.getElementById("lump-investment2-amount").value;
+        var lumpMonth2 = NaN, lumpAmt2 = 0;
+        if(lumpAge2Str !== "" && !isNaN(parseFloat(lumpAge2Str)) &&
+           lumpAmount2Str !== "" && !isNaN(parseFloat(lumpAmount2Str))) {
+          lumpMonth2 = Math.round((parseFloat(lumpAge2Str) - currentAge) * 12);
+          lumpAmt2 = parseFloat(lumpAmount2Str);
+        }
+        
+        // 積立月額と想定利回りの入力状況チェック（どちらか一方のみ入力）
         var depositStr = document.getElementById("withdrawal-1").value;
         var rateStr = document.getElementById("annual-rate-1").value;
         var depositProvided = (depositStr !== "" && !isNaN(parseFloat(depositStr)));
         var rateProvided = (rateStr !== "" && !isNaN(parseFloat(rateStr)));
-        
         if(depositProvided && rateProvided) {
           alert("積立月額と想定利回りのどちらか一方のみ入力してください。");
           return;
@@ -466,50 +488,52 @@
         
         var computedValue, resultLabel;
         if (depositProvided) {
-          // パターン１：積立月額入力時 → 想定利回り（実効年率）を逆算
+          // パターン１：積立月額が入力されている場合 → 想定利回り（実効年率）を逆算
           var depositBase = parseFloat(depositStr);
-          // 変更後の積立額：指定があればそれを、なければ基準と同じ
           var depositNewCandidate = (newWithdrawalStr !== "" && !isNaN(parseFloat(newWithdrawalStr))) ? parseFloat(newWithdrawalStr) : depositBase;
-          // 関数getRateNew：もし変更後の想定年利が入力されていなければ、実効年率は同じ値とする
-          function getRateNew(delta) {
+          // 変更後の年率は、入力があればその値、なければ同じ実効年率を使用
+          function getRateNew(x) {
             if(newAnnualRateStr !== "" && !isNaN(parseFloat(newAnnualRateStr))) {
               return parseFloat(newAnnualRateStr);
             } else {
-              return operatingRate + delta;
+              return x;
             }
           }
-          // f(δ)=simulate(基準, operatingRate+δ, depositNewCandidate, getRateNew(δ), switchingMonth, totalMonths) - finalAssets
-          function f(delta) {
-            return simulate(depositBase, operatingRate + delta, depositNewCandidate, getRateNew(delta), switchingMonth, totalMonths) - finalAssets;
+          // f(x)=simulate(depositBase, x, depositNewCandidate, getRateNew(x), switchingMonth, totalMonths, lumpMonth1, lumpAmt1, lumpMonth2, lumpAmt2) - finalAssets
+          function f(x) {
+            return simulate(depositBase, x, depositNewCandidate, getRateNew(x), switchingMonth, totalMonths, lumpMonth1, lumpAmt1, lumpMonth2, lumpAmt2) - finalAssets;
           }
           var f0 = f(0);
           var low, high;
-          if (f0 >= 0) { low = -50; high = 0; }
-          else { low = 0; high = 50; }
-          var delta;
-          for (var i = 0; i < 50; i++) {
-            delta = (low + high) / 2;
-            var fmid = f(delta);
-            if (Math.abs(fmid) < 1e-6) { break; }
-            if (fmid > 0) { high = delta; } else { low = delta; }
+          if (f0 < 0) {
+            low = 0; high = 10;
+            while(f(high) < 0) { high *= 2; }
+          } else {
+            high = 0; low = -10;
+            while(f(low) > 0) { low *= 2; }
           }
-          var effectiveRate = operatingRate + delta;
-          computedValue = effectiveRate;
+          var x;
+          for (var i = 0; i < 50; i++) {
+            x = (low + high) / 2;
+            var fmid = f(x);
+            if (Math.abs(fmid) < 1e-6) { break; }
+            if (fmid < 0) { low = x; } else { high = x; }
+          }
+          computedValue = x;
           resultLabel = "想定利回り";
         } else if (rateProvided) {
-          // パターン２：想定利回り入力時 → 必要な積立月額を逆算
+          // パターン２：想定利回りが入力されている場合 → 必要な積立月額を逆算
           var targetRate = parseFloat(rateStr);
-          // 変更後の積立額は、もし指定があればそれを使う（後半）、指定がなければ同じ積立額とする
-          function getDepositNew(deposit) {
+          function getDepositNew(d) {
             if(newWithdrawalStr !== "" && !isNaN(parseFloat(newWithdrawalStr))) {
               return parseFloat(newWithdrawalStr);
             } else {
-              return deposit;
+              return d;
             }
           }
           var newRateCandidate = (newAnnualRateStr !== "" && !isNaN(parseFloat(newAnnualRateStr))) ? parseFloat(newAnnualRateStr) : targetRate;
-          function g(deposit) {
-            return simulate(deposit, targetRate, getDepositNew(deposit), newRateCandidate, switchingMonth, totalMonths) - finalAssets;
+          function g(d) {
+            return simulate(d, targetRate, getDepositNew(d), newRateCandidate, switchingMonth, totalMonths, lumpMonth1, lumpAmt1, lumpMonth2, lumpAmt2) - finalAssets;
           }
           var lowDeposit = 0, highDeposit = 1;
           while(g(highDeposit) < 0) { highDeposit *= 2; if(highDeposit > 1e9) break; }
@@ -525,27 +549,28 @@
         }
         
         // 結果表示更新
-        document.getElementById("result-display").innerHTML = resultLabel + ": <span id='required-amount'>" + computedValue.toFixed(2) + "</span>" + (resultLabel === "想定利回り" ? "％" : "万円/月");
+        document.getElementById("result-display").innerHTML =
+          resultLabel + ": <span id='required-amount'>" + computedValue.toFixed(2) + "</span>" +
+          (resultLabel === "想定利回り" ? "％" : "万円/月");
         
-        // 前向きシミュレーション（グラフ更新）
+        // 前向きシミュレーションによるグラフ更新
         var asset = 0;
         var simulationLabels = [];
         var simulationData = [];
         var baseDeposit, baseRate, newDeposit, newRate;
         if (depositProvided) {
-          baseDeposit = parseFloat(depositStr);
-          baseRate = computedValue; // effective rate（計算結果）
+          baseDeposit = depositBase;
+          baseRate = computedValue; // 逆算結果：実効年率
           newDeposit = (newWithdrawalStr !== "" && !isNaN(parseFloat(newWithdrawalStr))) ? parseFloat(newWithdrawalStr) : baseDeposit;
           newRate = (newAnnualRateStr !== "" && !isNaN(parseFloat(newAnnualRateStr))) ? parseFloat(newAnnualRateStr) : baseRate;
         } else {
           baseDeposit = computedValue;
-          baseRate = parseFloat(rateStr);
+          baseRate = targetRate;
           newDeposit = (newWithdrawalStr !== "" && !isNaN(parseFloat(newWithdrawalStr))) ? parseFloat(newWithdrawalStr) : baseDeposit;
           newRate = (newAnnualRateStr !== "" && !isNaN(parseFloat(newAnnualRateStr))) ? parseFloat(newAnnualRateStr) : baseRate;
         }
         var monthlyRate;
         for (var m = 0; m <= totalMonths; m++) {
-          // 毎月、変更する年齢を境にパラメータを変更
           if (m < switchingMonth) {
             monthlyRate = (baseRate / 100) / 12;
             asset = asset * (1 + monthlyRate) + baseDeposit;
@@ -553,26 +578,10 @@
             monthlyRate = (newRate / 100) / 12;
             asset = asset * (1 + monthlyRate) + newDeposit;
           }
-          // 一括投資の反映（既存項目）
-          var lumpAge1Str = document.getElementById("lump-investment-age").value;
-          var lumpAmount1Str = document.getElementById("lump-investment-amount").value;
-          if(lumpAge1Str !== "" && !isNaN(parseFloat(lumpAge1Str)) &&
-             lumpAmount1Str !== "" && !isNaN(parseFloat(lumpAmount1Str))) {
-            var lumpMonth1 = Math.round((parseFloat(lumpAge1Str) - currentAge) * 12);
-            if(m === lumpMonth1) {
-              asset += parseFloat(lumpAmount1Str);
-            }
-          }
+          // 一括投資（既存項目）
+          if (!isNaN(lumpMonth1) && m === lumpMonth1) { asset += lumpAmt1; }
           // 一括投資（追加項目）
-          var lumpAge2Str = document.getElementById("lump-investment2-age").value;
-          var lumpAmount2Str = document.getElementById("lump-investment2-amount").value;
-          if(lumpAge2Str !== "" && !isNaN(parseFloat(lumpAge2Str)) &&
-             lumpAmount2Str !== "" && !isNaN(parseFloat(lumpAmount2Str))) {
-            var lumpMonth2 = Math.round((parseFloat(lumpAge2Str) - currentAge) * 12);
-            if(m === lumpMonth2) {
-              asset += parseFloat(lumpAmount2Str);
-            }
-          }
+          if (!isNaN(lumpMonth2) && m === lumpMonth2) { asset += lumpAmt2; }
           if (m % 12 === 0) {
             simulationLabels.push((currentAge + m/12) + "歳");
             simulationData.push(parseFloat(asset.toFixed(2)));
@@ -592,4 +601,5 @@
   
 </body>
 </html>
+
 
