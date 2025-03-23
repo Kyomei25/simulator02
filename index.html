@@ -188,6 +188,12 @@
       .input-wrapper select {
         padding: 8px 10px 8px 8px;
       }
+      /* ここで入力フィールドと単位を横並びにする */
+      .input-wrapper {
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+      }
       .c-button._shiny {
         margin: 20px auto;
       }
@@ -205,6 +211,7 @@
       .input-suffix,
       .inputs .field-group span.field-unit {
         font-size: 12px;
+        white-space: nowrap;
       }
       /* スマホビュー：老後開始時保有額のラベルを左寄せ */
       label[for="final-assets"] {
@@ -216,9 +223,11 @@
           text-align: left;
           margin-bottom: 5px;
       }
+      /* 入力フィールド横の単位も横並びになるよう調整 */
       .input-overlay .input-wrapper {
-          display: block;
-          text-align: right;
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
       }
       @media screen and (max-width: 768px) {
         .step-container {
@@ -354,7 +363,7 @@
       <div class="step-indicator">
         <img class="step-image" src="step2.png" alt="STEP 2">
       </div>
-      <div class="step-description">その他の項目は下記へ</div>
+      <div class="step-description">その他の項目（オプション）は下記へ</div>
     </div>
     
     <div class="inputs">
@@ -446,7 +455,7 @@
           currentMonthlyRate = Math.pow(1 + rateNew/100, 1/12) - 1;
           currentDeposit = depositNew;
         }
-        // ※普通年金方式（各月の終わりに積立）：
+        // ※普通年金方式（各月の終わりに積立）
         asset = asset * (1 + currentMonthlyRate) + currentDeposit;
       }
       return asset;
@@ -624,7 +633,3 @@
   
 </body>
 </html>
-
-
-
-
