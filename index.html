@@ -260,6 +260,7 @@
       margin-left: 5px;
       font-size: 12px;
       color: #545454;
+      white-space: nowrap;
     }
     hr {
       border: none;
@@ -366,7 +367,8 @@
       <div class="field-group">
         <span class="field-label">変更後の積立月額</span>
         <input type="number" id="new-withdrawal" class="card-input" placeholder="例：10">
-        <span class="field-unit">万円</span>
+        <!-- 「万円」のみ縦表示 -->
+        <span class="field-unit">万<br>円</span>
       </div>
       <div class="field-group">
         <span class="field-label">変更後の想定年利</span>
@@ -385,7 +387,8 @@
       <div class="field-group">
         <span class="field-label">金額</span>
         <input type="number" id="lump-investment-amount" class="card-input" placeholder="例：50">
-        <span class="field-unit">万円</span>
+        <!-- 「万円」のみ縦表示 -->
+        <span class="field-unit">万<br>円</span>
       </div>
       <h4>一括投資（追加）</h4>
       <p>一括投資（追加）：指定した年齢で一括で投資する方法です。</p>
@@ -397,7 +400,8 @@
       <div class="field-group">
         <span class="field-label">金額</span>
         <input type="number" id="lump-investment2-amount" class="card-input" placeholder="例：50">
-        <span class="field-unit">万円</span>
+        <!-- 「万円」のみ縦表示 -->
+        <span class="field-unit">万<br>円</span>
       </div>
       <button id="calculate2" class="c-button _shiny">シミュレーション開始</button>
     </div>
@@ -412,8 +416,8 @@
           var option = document.createElement("option");
           option.value = i;
           option.textContent = i;
-          if (defaultVal !== undefined && i === defaultVal) {
-            option.selected = true;
+          if (defaultVal !== undefined && i === defaultVal) { 
+            option.selected = true; 
           }
           selectElem.appendChild(option);
         }
