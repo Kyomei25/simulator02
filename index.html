@@ -201,11 +201,10 @@
       .inputs .field-group select {
         width: 100%;
       }
-      /* 単位のフォントサイズを小さく＆改行させない */
+      /* 単位のフォントサイズを小さく */
       .input-suffix,
       .inputs .field-group span.field-unit {
         font-size: 12px;
-        white-space: nowrap;
       }
       /* スマホビュー：老後開始時保有額のラベルを左寄せ */
       label[for="final-assets"] {
@@ -261,7 +260,6 @@
       margin-left: 5px;
       font-size: 12px;
       color: #545454;
-      white-space: nowrap;
     }
     hr {
       border: none;
@@ -414,8 +412,8 @@
           var option = document.createElement("option");
           option.value = i;
           option.textContent = i;
-          if (defaultVal !== undefined && i === defaultVal) { 
-            option.selected = true; 
+          if (defaultVal !== undefined && i === defaultVal) {
+            option.selected = true;
           }
           selectElem.appendChild(option);
         }
