@@ -173,31 +173,27 @@
         width: 95%;
         padding: 15px;
       }
-      
       .input-overlay .row {
         flex-direction: column;
         gap: 10px;
       }
       .left-item, .right-item {
         margin: 0;
-        /* ※スマホビューでは全項目左寄せになるが、必要な場合は個別に上書き可 */
         text-align: left;
       }
-      /* 各入力エリアの幅をスマホ用に調整 */
-      #retirement-start-age, #retirement-end-age,
-      #final-assets, #annual-rate-1, #withdrawal-1 {
+      #retirement-start-age, #retirement-end-age, #final-assets, #annual-rate-1, #withdrawal-1 {
         width: 100px;
       }
       .input-wrapper input[type="number"],
       .input-wrapper select {
-        padding: 8px 10px 8px 8px; /* 右側パディングを縮小 */
+        padding: 8px 10px 8px 8px;
       }
       .c-button._shiny {
         margin: 20px auto;
       }
       body { line-height: 1.6; }
       .step-image { width: 50px; }
-      .step-description { 
+      .step-description {
          font-size: 18px;
          margin-left: 5px;
       }
@@ -205,20 +201,16 @@
       .inputs .field-group select {
         width: 100%;
       }
-      /* スマホビュー：単位のフォントサイズを小さく */
-      .input-suffix {
+      /* 単位のフォントサイズを小さく */
+      .input-suffix,
+      .inputs .field-group span.field-unit {
         font-size: 12px;
       }
-
-      .field-unit {
-        font-size: 12px;
-      }
-      /* スマホビュー：特に「老後開始時保有額」のラベルを左寄せ */
+      /* スマホビュー：老後開始時保有額のラベルを左寄せ */
       label[for="final-assets"] {
         text-align: left;
         display: block;
       }
-      /* 既存の入力ラベルも左寄せに（必要に応じて） */
       .input-overlay label {
           display: block;
           text-align: left;
@@ -266,8 +258,9 @@
     }
     .inputs .field-group span.field-unit {
       margin-left: 5px;
-      font-size: 16px;
+      font-size: 12px;
       color: #545454;
+      white-space: nowrap;
     }
     hr {
       border: none;
@@ -289,6 +282,7 @@
     
     <div class="results">
       <p id="result-display">結果表示</p>
+      
       <div class="chart-container">
         <canvas id="financial-chart" width="600" height="300"></canvas>
         <script>
@@ -360,7 +354,7 @@
       <div class="step-indicator">
         <img class="step-image" src="step2.png" alt="STEP 2">
       </div>
-      <div class="step-description">その他の項目は下記へ</div>
+      <div class="step-description">その他の項目（オプション）は下記へ</div>
     </div>
     
     <div class="inputs">
@@ -419,8 +413,8 @@
           var option = document.createElement("option");
           option.value = i;
           option.textContent = i;
-          if (defaultVal !== undefined && i === defaultVal) {
-            option.selected = true;
+          if (defaultVal !== undefined && i === defaultVal) { 
+            option.selected = true; 
           }
           selectElem.appendChild(option);
         }
@@ -452,6 +446,7 @@
           currentMonthlyRate = Math.pow(1 + rateNew/100, 1/12) - 1;
           currentDeposit = depositNew;
         }
+        // ※普通年金方式（各月の終わりに積立）：
         asset = asset * (1 + currentMonthlyRate) + currentDeposit;
       }
       return asset;
@@ -522,7 +517,7 @@
         
         var computedValue, resultLabel;
         if (depositProvided) {
-          // パターン１：積立月額が入力されている場合 → 想定平均利回り（実効年率）を逆算
+          // パターン１：積立月額入力時 → 想定平均利回り（実効年率）を逆算
           var depositBase = parseFloat(depositStr);
           var depositNewCandidate = (newWithdrawalStr !== "" && !isNaN(parseFloat(newWithdrawalStr))) ? parseFloat(newWithdrawalStr) : depositBase;
           function getRateNew(x) {
@@ -554,7 +549,7 @@
           computedValue = x;
           resultLabel = "想定平均利回り";
         } else if (rateProvided) {
-          // パターン２：想定平均利回りが入力されている場合 → 必要な積立月額を逆算
+          // パターン２：想定平均利回り入力時 → 必要な積立月額を逆算
           var targetRate = parseFloat(rateStr);
           function getDepositNew(d) {
             if(newWithdrawalStr !== "" && !isNaN(parseFloat(newWithdrawalStr))) {
@@ -629,6 +624,7 @@
   
 </body>
 </html>
+
 
 
 
