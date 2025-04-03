@@ -12,8 +12,15 @@
       font-family: 'LINE Seed JP_TTF';
       src: url('LINESeedJP_TTF.ttf') format('truetype');
     }
-    * { box-sizing: border-box; }
-    html { font-size: 16px; }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
     body {
       font-family: 'LINE Seed JP_TTF', sans-serif;
       background-color: #ffffff;
@@ -21,16 +28,27 @@
       color: #545454;
       margin: 0;
     }
+
     /* PCビュー（768px以上） */
     @media screen and (min-width: 769px) {
-      .pc-label { display: inline-block; }
-      .mobile-label { display: none; }
+      .pc-label {
+        display: inline-block;
+      }
+      .mobile-label {
+        display: none;
+      }
     }
+
     /* スマホビュー（768px以下） */
     @media screen and (max-width: 768px) {
-      .pc-label { display: none; }
-      .mobile-label { display: inline-block; }
+      .pc-label {
+        display: none;
+      }
+      .mobile-label {
+        display: inline-block;
+      }
     }
+
     .container {
       display: flex;
       flex-direction: column;
@@ -38,13 +56,16 @@
       gap: 20px;
       padding: 0 10px;
     }
+
     /* カードスタイル（フラットデザイン） */
-    .results, .inputs {
+    .results,
+    .inputs {
       width: 80%;
       max-width: 800px;
       padding: 20px;
       background-color: #ffffff;
     }
+
     /* STEPテキスト */
     .step-container {
       width: 80%;
@@ -52,8 +73,17 @@
       text-align: center;
       margin-bottom: 20px;
     }
-    .step-indicator { display: inline-block; vertical-align: top; }
-    .step-image { width: 80px; height: auto; }
+
+    .step-indicator {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .step-image {
+      width: 80px;
+      height: auto;
+    }
+
     .step-description {
       display: inline-block;
       margin-left: 10px;
@@ -64,6 +94,7 @@
       margin-top: 20px;
       padding-bottom: 4px;
     }
+
     .step-description::after {
       content: "";
       position: absolute;
@@ -74,8 +105,12 @@
       background-color: #ffeb3b;
       z-index: -1;
     }
+
     /* 結果エリア */
-    .results { position: relative; }
+    .results {
+      position: relative;
+    }
+
     /* 入力ラッパー */
     .input-wrapper input[type="number"],
     .input-wrapper select {
@@ -88,26 +123,60 @@
       font-size: 16px;
       color: #00aaff;
     }
+
     .input-wrapper input[type="number"]::-webkit-inner-spin-button,
     .input-wrapper input[type="number"]::-webkit-outer-spin-button {
       -webkit-appearance: none;
       margin: 0;
     }
+
     /* PC用各入力固定幅 */
-    #retirement-start-age, #retirement-end-age { width: 200px; }
-    #final-assets { width: 200px; }
-    #annual-rate-1, #withdrawal-1 { width: 200px; }
-    .chart-container { position: relative; margin-bottom: 10px; }
-    .input-overlay { margin-top: 20px; padding: 0 20px; }
-    .input-overlay .row { 
-      display: flex; 
-      width: 100%; 
+    #retirement-start-age,
+    #retirement-end-age {
+      width: 200px;
+    }
+
+    #final-assets {
+      width: 200px;
+    }
+
+    #annual-rate-1,
+    #withdrawal-1 {
+      width: 200px;
+    }
+
+    .chart-container {
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .input-overlay {
+      margin-top: 20px;
+      padding: 0 20px;
+    }
+
+    .input-overlay .row {
+      display: flex;
+      width: 100%;
       gap: 20px;
       flex-wrap: wrap;
     }
-    .first-row { justify-content: space-between; }
-    .left-item { text-align: left; flex: 1; }
-    .right-item { text-align: right; flex: 1; margin-left: 50px; }
+
+    .first-row {
+      justify-content: space-between;
+    }
+
+    .left-item {
+      text-align: left;
+      flex: 1;
+    }
+
+    .right-item {
+      text-align: right;
+      flex: 1;
+      margin-left: 50px;
+    }
+
     .additional-row {
       margin-top: 20px;
       display: flex;
@@ -115,9 +184,21 @@
       gap: 20px;
       flex-wrap: wrap;
     }
-    .additional-row .left-item, .additional-row .right-item { flex: 1; }
-    .additional-row .right-item { text-align: right; }
-    .full-item { flex: 1; width: 100%; }
+
+    .additional-row .left-item,
+    .additional-row .right-item {
+      flex: 1;
+    }
+
+    .additional-row .right-item {
+      text-align: right;
+    }
+
+    .full-item {
+      flex: 1;
+      width: 100%;
+    }
+
     /* 結果表示（動的更新） */
     #result-display {
       font-size: 1.5em;
@@ -125,6 +206,7 @@
       color: #009bdd;
       text-align: center;
     }
+
     /* シミュレーション開始ボタン */
     .c-button._shiny {
       display: block;
@@ -143,6 +225,7 @@
       transition: 300ms;
       position: relative;
     }
+
     .c-button._shiny::before {
       position: absolute;
       content: '';
@@ -155,115 +238,156 @@
       transition: 300ms;
       animation: shinyshiny 2.5s ease-in-out infinite;
     }
+
     .c-button._shiny:hover {
       text-decoration: none;
       color: #fff;
       box-shadow: none;
       -webkit-transform: translateY(2px);
     }
+
     @-webkit-keyframes shinyshiny {
-      0% { -webkit-transform: scale(0) rotate(45deg); opacity: 0; }
-      80% { -webkit-transform: scale(0) rotate(45deg); opacity: 0.5; }
-      81% { -webkit-transform: scale(4) rotate(45deg); opacity: 1; }
-      100% { -webkit-transform: scale(50) rotate(45deg); opacity: 0; }
+      0% {
+        -webkit-transform: scale(0) rotate(45deg);
+        opacity: 0;
+      }
+      80% {
+        -webkit-transform: scale(0) rotate(45deg);
+        opacity: 0.5;
+      }
+      81% {
+        -webkit-transform: scale(4) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        -webkit-transform: scale(50) rotate(45deg);
+        opacity: 0;
+      }
     }
-    canvas { max-width: 100%; height: auto; }
+
+    canvas {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ▼▼▼ スマホビュー追加調整 ▼▼▼ */
     @media screen and (max-width: 768px) {
-      .results, .inputs {
+      .results,
+      .inputs {
         width: 95%;
         padding: 15px;
       }
-      @media screen and (max-width: 768px) {
-  /* 既存の .left-item, .right-item の設定に加え、追加で上書き */
-  .additional-row .right-item {
-    text-align: left !important;
-    margin-left: 0 !important;
-  }
-}
 
       .input-overlay .row {
-        flex-direction: column;
+        flex-direction: column; /* 縦に積み重ねる */
         gap: 10px;
+        align-items: flex-start; /* 左寄せ */
       }
-      .left-item, .right-item {
-        margin: 0;
+
+      .left-item,
+      .right-item {
+        width: 100% !important; /* 幅を揃える */
+        margin: 0 !important;   /* 不要な余白を消す */
         text-align: left;
       }
-      /* 各入力エリアの幅をスマホ用に調整 */
-      #retirement-start-age, #retirement-end-age, #final-assets, #annual-rate-1, #withdrawal-1 {
-        width: 100px;
+
+      .input-wrapper {
+        width: 100%; /* 入力枠を最大幅に */
       }
+
+      .input-overlay label {
+        display: block;
+        text-align: left;
+        margin-bottom: 5px;
+      }
+
+      #retirement-start-age,
+      #retirement-end-age,
+      #final-assets,
+      #annual-rate-1,
+      #withdrawal-1 {
+        width: 100px; /* スマホ用に調整 */
+      }
+
       .input-wrapper input[type="number"],
       .input-wrapper select {
         padding: 8px 10px 8px 8px;
       }
-      /* 入力フィールドと単位を横並びに */
+
       .input-wrapper {
         display: inline-flex;
         align-items: center;
         white-space: nowrap;
       }
+
       .c-button._shiny {
         margin: 20px auto;
       }
-      body { line-height: 1.6; }
-      .step-image { width: 50px; }
-      .step-description {
-         font-size: 18px;
-         margin-left: 5px;
+
+      body {
+        line-height: 1.6;
       }
+
+      .step-image {
+        width: 50px;
+      }
+
+      .step-description {
+        font-size: 18px;
+        margin-left: 5px;
+      }
+
       .inputs .field-group input[type="number"],
       .inputs .field-group select {
         width: 100%;
       }
-      /* 単位のフォントサイズを小さく */
+
       .input-suffix,
       .inputs .field-group span.field-unit {
         font-size: 12px;
         white-space: nowrap;
       }
-      /* スマホビュー：老後開始時保有額のラベルを左寄せ */
+
       label[for="final-assets"] {
         text-align: left;
         display: block;
       }
-      /* ※ここで老後開始時保有額の入力フィールドの枠自体を左寄せする */
+
       label[for="final-assets"] + .input-wrapper {
         text-align: left !important;
         margin-left: 0 !important;
       }
-      .input-overlay label {
-          display: block;
-          text-align: left;
-          margin-bottom: 5px;
-      }
-      .input-overlay .input-wrapper {
-          display: inline-flex;
-          align-items: center;
-          white-space: nowrap;
-      }
+
       @media screen and (max-width: 768px) {
         .step-container {
           margin-bottom: -30px;
         }
       }
     }
+    /* ▲▲▲ ここまでスマホビューの追加調整 ▲▲▲ */
+
     .inputs h4 {
       color: #009bdd;
       margin: 10px 0 5px;
       font-size: 1.3em;
       font-weight: bold;
     }
+
     .inputs p {
       font-size: 0.9em;
       color: #545454;
       margin-bottom: 10px;
     }
-    .inputs .field-group { margin-bottom: 10px; }
+
+    .inputs .field-group {
+      margin-bottom: 10px;
+    }
+
     .inputs .field-group span.field-label {
       display: inline-block;
       width: 150px;
     }
+
     .inputs .field-group input[type="number"],
     .inputs .field-group select {
       background-color: #e6f7ff;
@@ -273,17 +397,20 @@
       width: 100px;
       color: #00aaff;
     }
+
     .inputs .field-group input[type="number"]::-webkit-inner-spin-button,
     .inputs .field-group input[type="number"]::-webkit-outer-spin-button {
       -webkit-appearance: none;
       margin: 0;
     }
+
     .inputs .field-group span.field-unit {
       margin-left: 5px;
       font-size: 16px;
       color: #545454;
       white-space: nowrap;
     }
+
     hr {
       border: none;
       border-top: 1px solid #ddd;
@@ -291,6 +418,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <img src="title.webp" alt="老後資金シミュレーター" style="width:100%; height:auto;">
@@ -303,6 +431,18 @@
     </div>
     
     <div class="results">
+      <!-- ここから追加  -->
+      <div class="question-container" style="margin-bottom: 20px; text-align: center;">
+        <p style="margin-bottom: 10px;">毎月、積み立てる金額は決まってますか？</p>
+        <label style="margin-right: 20px;">
+          <input type="radio" name="fixedAmount" value="yes" id="fixedAmountYes"> はい
+        </label>
+        <label>
+          <input type="radio" name="fixedAmount" value="no" id="fixedAmountNo"> いいえ
+        </label>
+      </div>
+      <!-- ここまで追加  -->
+      
       <p id="result-display">結果表示</p>
       
       <div class="chart-container">
@@ -335,42 +475,49 @@
                 }
               }
             };
-            retirementChart = new Chart(ctx, { type: 'bar', data: initialData, options: chartOptions });
+            retirementChart = new Chart(ctx, {
+              type: 'bar',
+              data: initialData,
+              options: chartOptions
+            });
           });
         </script>
+        
         <div class="input-overlay">
           <div class="row first-row">
             <div class="left-item">
-              <label for="retirement-start-age">現在年齢</label>
+              <label for="retirement-start-age">現在の年齢</label>
               <div class="input-wrapper">
                 <select id="retirement-start-age" required></select>
                 <span class="input-suffix">歳</span>
               </div>
             </div>
             <div class="right-item">
-              <label for="retirement-end-age">老後開始年齢</label>
+              <label for="retirement-end-age">老後開始の年齢</label>
               <div class="input-wrapper">
                 <select id="retirement-end-age" required></select>
                 <span class="input-suffix">歳</span>
               </div>
             </div>
           </div>
+          
           <div class="row additional-row">
             <div class="left-item">
-              <label for="withdrawal-1">積立月額</label>
+              <label for="withdrawal-1">積立する金額／月</label>
               <div class="input-wrapper">
                 <input type="number" id="withdrawal-1" placeholder="例：5">
                 <span class="input-suffix">万円/月</span>
               </div>
             </div>
             <div class="right-item">
-              <label for="final-assets">老後開始時保有額</label>
+              <label for="final-assets">老後開始時保有額（シミュレター①結果の「保有額」を記入する）</label>
               <div class="input-wrapper">
                 <input type="number" id="final-assets" placeholder="例：100" required>
                 <span class="input-suffix">万円</span>
               </div>
             </div>
           </div>
+
           <div class="row">
             <div class="full-item">
               <label for="annual-rate-1">想定平均利回り</label><br class="desktop-only">
@@ -382,6 +529,13 @@
           </div>
         </div>
       </div>
+
+      <!-- 参考利回り表を追加 -->
+      <div class="reference-rate-table" style="text-align: center; margin: 20px auto;">
+        <img src="利回り参考.png" alt="参考利回り表" style="width:100%; height:auto;">
+      </div>
+      <!-- ここまで -->
+
       <button id="calculate" class="c-button _shiny">シミュレーション開始</button>
     </div>
     
@@ -393,7 +547,8 @@
     </div>
     
     <div class="inputs">
-      <h4>金利・積立額の変更</h4>
+      <h4>積立金額と金利の変更</h4>
+      <p>子供が大きくなり教育資金の分を積立に回せるなど、毎月の積立金額が変わった時に記入する欄です。</p>
       <div class="field-group">
         <span class="field-label">変更する年齢</span>
         <select id="change-age" class="card-input"></select>
@@ -411,8 +566,7 @@
       </div>
       <hr>
       <h4>一括投資</h4>
-      <p>一括投資とは、指定した年齢で一括で投資する方法です。<br>
-         ※この項目は自動的に現在年齢が設定されます。</p>
+      <p>保険の満期や遺産などを、一括で投資する場合に記入する欄です。</p>
       <div class="field-group">
         <span class="field-label">年齢</span>
         <select id="lump-investment-age" class="card-input"></select>
@@ -460,25 +614,71 @@
       populateSelect("lump-investment-age", 60);
       populateSelect("lump-investment2-age", 60);
     });
-    
+
+    // ラジオボタンの状態に応じて入力欄を制御
+    document.addEventListener('DOMContentLoaded', function() {
+      const withdrawalInput = document.getElementById("withdrawal-1");
+      const rateInput = document.getElementById("annual-rate-1");
+
+      // 初期状態（いずれも未選択時は通常状態）
+      withdrawalInput.disabled = false;
+      withdrawalInput.style.backgroundColor = "";
+      rateInput.disabled = false;
+      rateInput.style.backgroundColor = "";
+
+      // 「はい」選択（積立金額を入力可能、利回りは入力不可にしてグレー）
+      document.getElementById("fixedAmountYes").addEventListener("change", function() {
+        withdrawalInput.disabled = false;
+        withdrawalInput.style.backgroundColor = ""; // 有効: 通常色
+        rateInput.disabled = true;
+        rateInput.value = "";
+        rateInput.style.backgroundColor = "#cccccc"; // 無効: グレー
+      });
+
+      // 「いいえ」選択（利回りを入力可能、積立金額は入力不可にしてグレー）
+      document.getElementById("fixedAmountNo").addEventListener("change", function() {
+        rateInput.disabled = false;
+        rateInput.style.backgroundColor = ""; // 有効: 通常色
+        withdrawalInput.disabled = true;
+        withdrawalInput.value = "";
+        withdrawalInput.style.backgroundColor = "#cccccc"; // 無効: グレー
+      });
+    });
+
     // 前向きシミュレーション関数（修正後：月利は複利換算で算出）
     // depositBase, rateBase: 変更前の積立額・年率
     // depositNew, rateNew: 変更後の積立額・年率
     // switchingMonth: 変更する年齢（月数換算）
     // totalMonths: 全期間の月数
     // lumpMonth1, lumpAmt1, lumpMonth2, lumpAmt2: 一括投資の実施月と金額
-    function simulate(depositBase, rateBase, depositNew, rateNew, switchingMonth, totalMonths, lumpMonth1, lumpAmt1, lumpMonth2, lumpAmt2) {
+    function simulate(
+      depositBase,
+      rateBase,
+      depositNew,
+      rateNew,
+      switchingMonth,
+      totalMonths,
+      lumpMonth1,
+      lumpAmt1,
+      lumpMonth2,
+      lumpAmt2
+    ) {
       var asset = 0;
       for (var m = 0; m < totalMonths; m++) {
         // 一括投資の追加
-        if (!isNaN(lumpMonth1) && m === lumpMonth1) { asset += lumpAmt1; }
-        if (!isNaN(lumpMonth2) && m === lumpMonth2) { asset += lumpAmt2; }
+        if (!isNaN(lumpMonth1) && m === lumpMonth1) {
+          asset += lumpAmt1;
+        }
+        if (!isNaN(lumpMonth2) && m === lumpMonth2) {
+          asset += lumpAmt2;
+        }
+
         var currentMonthlyRate, currentDeposit;
         if (m < switchingMonth) {
-          currentMonthlyRate = Math.pow(1 + rateBase/100, 1/12) - 1;
+          currentMonthlyRate = Math.pow(1 + rateBase / 100, 1 / 12) - 1;
           currentDeposit = depositBase;
         } else {
-          currentMonthlyRate = Math.pow(1 + rateNew/100, 1/12) - 1;
+          currentMonthlyRate = Math.pow(1 + rateNew / 100, 1 / 12) - 1;
           currentDeposit = depositNew;
         }
         // ※普通年金方式（各月の終わりに積立）
@@ -486,13 +686,22 @@
       }
       return asset;
     }
-    
+
     document.addEventListener('DOMContentLoaded', function() {
       function runSimulation() {
+        // 「はい」「いいえ」が選択されているかチェック
+        const isYesSelected = document.getElementById("fixedAmountYes").checked;
+        const isNoSelected = document.getElementById("fixedAmountNo").checked;
+        if(!isYesSelected && !isNoSelected) {
+          alert("「毎月、積み立てる金額は決まってますか？」の「はい」か「いいえ」を選択してください。");
+          return;
+        }
+
         // 必須入力項目
         var currentAge = parseFloat(document.getElementById("retirement-start-age").value);
         var retirementAge = parseFloat(document.getElementById("retirement-end-age").value);
         var finalAssets = parseFloat(document.getElementById("final-assets").value);
+
         if (isNaN(currentAge) || isNaN(retirementAge) || isNaN(finalAssets)) {
           alert("必須項目（現在年齢、老後開始年齢、老後開始時保有額）を正しく入力してください。");
           return;
@@ -501,6 +710,7 @@
           alert("老後開始年齢は現在年齢より大きくなければなりません。");
           return;
         }
+
         var totalMonths = (retirementAge - currentAge) * 12;
         
         // 金利・積立額変更の入力取得（任意）
@@ -508,6 +718,7 @@
         var newWithdrawalStr = document.getElementById("new-withdrawal").value;
         var newAnnualRateStr = document.getElementById("new-annual-rate").value;
         var switchingMonth = totalMonths; // 変更なしの場合
+
         if(changeAgeStr !== "" && !isNaN(parseFloat(changeAgeStr))) {
           var changeAge = parseFloat(changeAgeStr);
           switchingMonth = Math.round((changeAge - currentAge) * 12);
@@ -515,9 +726,7 @@
           if(switchingMonth > totalMonths) switchingMonth = totalMonths;
         }
         
-        // 一括投資の入力取得（既存項目）
-        // 自動的に「現在の年齢」を設定する
-        document.getElementById("lump-investment-age").value = currentAge;
+        // 一括投資の入力取得
         var lumpAge1Str = document.getElementById("lump-investment-age").value;
         var lumpAmount1Str = document.getElementById("lump-investment-amount").value;
         var lumpMonth1 = NaN, lumpAmt1 = 0;
@@ -526,7 +735,8 @@
           lumpMonth1 = Math.round((parseFloat(lumpAge1Str) - currentAge) * 12);
           lumpAmt1 = parseFloat(lumpAmount1Str);
         }
-        // 一括投資の入力取得（追加項目）
+
+        // 一括投資の追加2
         var lumpAge2Str = document.getElementById("lump-investment2-age").value;
         var lumpAmount2Str = document.getElementById("lump-investment2-amount").value;
         var lumpMonth2 = NaN, lumpAmt2 = 0;
@@ -535,26 +745,25 @@
           lumpMonth2 = Math.round((parseFloat(lumpAge2Str) - currentAge) * 12);
           lumpAmt2 = parseFloat(lumpAmount2Str);
         }
-        
-        // 積立月額と想定利回りの入力状況チェック（どちらか一方のみ入力）
+
         var depositStr = document.getElementById("withdrawal-1").value;
         var rateStr = document.getElementById("annual-rate-1").value;
-        var depositProvided = (depositStr !== "" && !isNaN(parseFloat(depositStr)));
-        var rateProvided = (rateStr !== "" && !isNaN(parseFloat(rateStr)));
-        if(depositProvided && rateProvided) {
-          alert("積立月額と想定平均利回りのどちらか一方のみ入力してください。");
-          return;
-        }
-        if(!depositProvided && !rateProvided) {
-          alert("積立月額か想定平均利回りのどちらか一方を入力してください。");
-          return;
-        }
-        
+
+        // ---- ここからラジオボタンによる分岐 ----
         var computedValue, resultLabel;
-        if (depositProvided) {
-          // パターン１：積立月額入力時 → 想定平均利回り（実効年率）を逆算
+
+        // 「はい」＝ 毎月の積立金額を入力して、最終保有額になるための利回りを逆算
+        if(isYesSelected) {
+          // 積立金額が正しく入力されているかチェック
+          if(depositStr === "" || isNaN(parseFloat(depositStr))) {
+            alert("積立月額を入力してください。");
+            return;
+          }
           var depositBase = parseFloat(depositStr);
-          var depositNewCandidate = (newWithdrawalStr !== "" && !isNaN(parseFloat(newWithdrawalStr))) ? parseFloat(newWithdrawalStr) : depositBase;
+          var depositNewCandidate = (!isNaN(parseFloat(newWithdrawalStr)) && newWithdrawalStr !== "")
+            ? parseFloat(newWithdrawalStr)
+            : depositBase;
+          
           function getRateNew(x) {
             if(newAnnualRateStr !== "" && !isNaN(parseFloat(newAnnualRateStr))) {
               return parseFloat(newAnnualRateStr);
@@ -562,91 +771,182 @@
               return x;
             }
           }
+
           function f(x) {
-            return simulate(depositBase, x, depositNewCandidate, getRateNew(x), switchingMonth, totalMonths, lumpMonth1, lumpAmt1, lumpMonth2, lumpAmt2) - finalAssets;
+            return simulate(
+              depositBase,
+              x,
+              depositNewCandidate,
+              getRateNew(x),
+              switchingMonth,
+              totalMonths,
+              lumpMonth1,
+              lumpAmt1,
+              lumpMonth2,
+              lumpAmt2
+            ) - finalAssets;
           }
+
+          // バイナリサーチで x(利回り) を求める
           var f0 = f(0);
           var low, high;
+
           if (f0 < 0) {
-            low = 0; high = 10;
-            while(f(high) < 0) { high *= 2; }
+            low = 0;
+            high = 10;
+            while (f(high) < 0) {
+              high *= 2;
+            }
           } else {
-            high = 0; low = -10;
-            while(f(low) > 0) { low *= 2; }
+            high = 0;
+            low = -10;
+            while (f(low) > 0) {
+              low *= 2;
+            }
           }
+
           var x;
           for (var i = 0; i < 50; i++) {
             x = (low + high) / 2;
             var fmid = f(x);
-            if (Math.abs(fmid) < 1e-6) { break; }
-            if (fmid < 0) { low = x; } else { high = x; }
+            if (Math.abs(fmid) < 1e-6) {
+              break;
+            }
+            if (fmid < 0) {
+              low = x;
+            } else {
+              high = x;
+            }
           }
+
           computedValue = x;
           resultLabel = "想定平均利回り";
-        } else if (rateProvided) {
-          // パターン２：想定平均利回り入力時 → 必要な積立月額を逆算
+
+        } 
+        // 「いいえ」＝ 想定平均利回りを入力して、最終保有額になるための積立金額を逆算
+        else if(isNoSelected) {
+          // 想定平均利回りが正しく入力されているかチェック
+          if(rateStr === "" || isNaN(parseFloat(rateStr))) {
+            alert("想定平均利回りを入力してください。");
+            return;
+          }
           var targetRate = parseFloat(rateStr);
+
           function getDepositNew(d) {
-            if(newWithdrawalStr !== "" && !isNaN(parseFloat(newWithdrawalStr))) {
+            if(!isNaN(parseFloat(newWithdrawalStr)) && newWithdrawalStr !== "") {
               return parseFloat(newWithdrawalStr);
             } else {
               return d;
             }
           }
-          var newRateCandidate = (newAnnualRateStr !== "" && !isNaN(parseFloat(newAnnualRateStr))) ? parseFloat(newAnnualRateStr) : targetRate;
+
+          var newRateCandidate = (!isNaN(parseFloat(newAnnualRateStr)) && newAnnualRateStr !== "")
+            ? parseFloat(newAnnualRateStr)
+            : targetRate;
+
           function g(d) {
-            return simulate(d, targetRate, getDepositNew(d), newRateCandidate, switchingMonth, totalMonths, lumpMonth1, lumpAmt1, lumpMonth2, lumpAmt2) - finalAssets;
+            return simulate(
+              d,
+              targetRate,
+              getDepositNew(d),
+              newRateCandidate,
+              switchingMonth,
+              totalMonths,
+              lumpMonth1,
+              lumpAmt1,
+              lumpMonth2,
+              lumpAmt2
+            ) - finalAssets;
           }
-          var lowDeposit = 0, highDeposit = 1;
-          while(g(highDeposit) < 0) { highDeposit *= 2; if(highDeposit > 1e9) break; }
+
+          // バイナリサーチで d(積立月額) を求める
+          var lowDeposit = 0,
+              highDeposit = 1;
+
+          while (g(highDeposit) < 0) {
+            highDeposit *= 2;
+            if (highDeposit > 1e9) break;
+          }
+
           var depositValue;
           for (var i = 0; i < 50; i++) {
             depositValue = (lowDeposit + highDeposit) / 2;
             var gmid = g(depositValue);
-            if (Math.abs(gmid) < 1e-6) { break; }
-            if (gmid < 0) { lowDeposit = depositValue; } else { highDeposit = depositValue; }
+            if (Math.abs(gmid) < 1e-6) {
+              break;
+            }
+            if (gmid < 0) {
+              lowDeposit = depositValue;
+            } else {
+              highDeposit = depositValue;
+            }
           }
+
           computedValue = depositValue;
           resultLabel = "積立月額";
         }
-        
+        // ---- ここまでラジオボタンによる分岐 ----
+
+        // 結果表示
         document.getElementById("result-display").innerHTML =
           resultLabel + ": <span id='required-amount'>" + computedValue.toFixed(1) + "</span>" +
           (resultLabel === "想定平均利回り" ? "％" : "万円/月");
         
+        // グラフの描画更新用に、再度シミュレーションした推移データを計算
         var asset = 0;
         var simulationLabels = [];
         var simulationData = [];
         var baseDeposit, baseRate, newDeposit, newRate;
-        if (depositProvided) {
-          baseDeposit = depositBase;
-          baseRate = computedValue;
-          newDeposit = (!isNaN(newWithdrawalStr) && newWithdrawalStr !== "") ? parseFloat(newWithdrawalStr) : baseDeposit;
-          newRate = (!isNaN(newAnnualRateStr) && newAnnualRateStr !== "") ? parseFloat(newAnnualRateStr) : baseRate;
+
+        if(isYesSelected) {
+          // 積立額入力→逆算した利回り
+          var depositBaseNum = parseFloat(depositStr);
+          baseDeposit = depositBaseNum;
+          baseRate = computedValue; // 逆算利回り
+          newDeposit = (!isNaN(parseFloat(newWithdrawalStr)) && newWithdrawalStr !== "") 
+            ? parseFloat(newWithdrawalStr)
+            : baseDeposit;
+          newRate = (!isNaN(parseFloat(newAnnualRateStr)) && newAnnualRateStr !== "")
+            ? parseFloat(newAnnualRateStr)
+            : baseRate;
         } else {
-          baseDeposit = computedValue;
+          // 利回り入力→逆算した積立額
+          var targetRate = parseFloat(rateStr);
+          baseDeposit = computedValue; // 逆算積立額
           baseRate = targetRate;
-          newDeposit = (!isNaN(newWithdrawalStr) && newWithdrawalStr !== "") ? parseFloat(newWithdrawalStr) : baseDeposit;
-          newRate = (!isNaN(newAnnualRateStr) && newAnnualRateStr !== "") ? parseFloat(newAnnualRateStr) : baseRate;
+          newDeposit = (!isNaN(parseFloat(newWithdrawalStr)) && newWithdrawalStr !== "")
+            ? parseFloat(newWithdrawalStr)
+            : baseDeposit;
+          newRate = (!isNaN(parseFloat(newAnnualRateStr)) && newAnnualRateStr !== "")
+            ? parseFloat(newAnnualRateStr)
+            : baseRate;
         }
-        var monthlyRate;
+
         for (var m = 0; m <= totalMonths; m++) {
           if (m < switchingMonth) {
-            monthlyRate = Math.pow(1 + baseRate/100, 1/12) - 1;
+            var monthlyRate = Math.pow(1 + baseRate / 100, 1 / 12) - 1;
             asset = asset * (1 + monthlyRate) + baseDeposit;
           } else {
-            monthlyRate = Math.pow(1 + newRate/100, 1/12) - 1;
-            asset = asset * (1 + monthlyRate) + newDeposit;
+            var monthlyRate2 = Math.pow(1 + newRate / 100, 1 / 12) - 1;
+            asset = asset * (1 + monthlyRate2) + newDeposit;
           }
-          if (!isNaN(lumpMonth1) && m === lumpMonth1) { asset += lumpAmt1; }
-          if (!isNaN(lumpMonth2) && m === lumpMonth2) { asset += lumpAmt2; }
+          // 一括投資の追加
+          if (!isNaN(lumpMonth1) && m === lumpMonth1) {
+            asset += lumpAmt1;
+          }
+          if (!isNaN(lumpMonth2) && m === lumpMonth2) {
+            asset += lumpAmt2;
+          }
           // 最終月は老後開始時保有額に合わせる
-          if (m === totalMonths) { asset = finalAssets; }
+          if (m === totalMonths) {
+            asset = finalAssets;
+          }
           if (m % 12 === 0) {
-            simulationLabels.push((currentAge + m/12) + "歳");
+            simulationLabels.push((currentAge + m / 12) + "歳");
             simulationData.push(parseFloat(asset.toFixed(0)));
           }
         }
+
         retirementChart.data.labels = simulationLabels;
         retirementChart.data.datasets[0].data = simulationData;
         retirementChart.update();
@@ -658,6 +958,5 @@
       document.getElementById("calculate2").addEventListener("click", runSimulation);
     });
   </script>
-  
 </body>
 </html>
