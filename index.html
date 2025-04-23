@@ -39,7 +39,15 @@
     .c-button._shiny:hover{text-decoration:none;color:#fff;box-shadow:none;-webkit-transform:translateY(2px)}
     @-webkit-keyframes shinyshiny{0%{-webkit-transform:scale(0) rotate(45deg);opacity:0}80%{-webkit-transform:scale(0) rotate(45deg);opacity:.5}81%{-webkit-transform:scale(4) rotate(45deg);opacity:1}100%{-webkit-transform:scale(50) rotate(45deg);opacity:0}}
     canvas{max-width:100%;height:auto}
+    
     @media screen and (max-width:768px){.results,.inputs{width:100%;padding:0}.input-overlay .row{flex-direction:column;gap:10px;align-items:flex-start}.left-item,.right-item{width:100%!important;margin:0!important;text-align:left}.input-wrapper{width:100%}.input-overlay label{display:block;text-align:left;margin-bottom:5px}#retirement-start-age,#retirement-end-age,#final-assets,#annual-rate-1,#withdrawal-1{width:100px}.input-wrapper input[type="number"],.input-wrapper select{padding:8px 10px 8px 8px}.input-overlay .input-wrapper{text-align:right}.step-description{font-size:18px;margin-left:5px}.reference-rate-table p.note{font-size:.75em}}
+    /* スマホ用 : 画像を 130% に拡大（値はお好みで調整可）*/
+.reference-rate-table img{
+  width:130% !important;   /* ← inline style の width:100% を上書きするため !important を付ける */
+  max-width:none;          /* はみ出しを許可して自然に拡大 */
+  margin-left:-15%; 
+}
+
     .inputs h4{color:#009bdd;margin:10px 0 5px;font-size:1.3em;font-weight:bold}
     .inputs p{font-size:.9em;color:#545454;margin-bottom:10px}
     .inputs .field-group{margin-bottom:10px}
@@ -89,7 +97,7 @@
       <div class="field-group"><span class="field-label">年齢</span><select id="lump-investment-age" class="card-input"></select><span class="field-unit">歳</span></div>
       <div class="field-group"><span class="field-label">金額</span><input type="number" id="lump-investment-amount" class="card-input" placeholder="例：50"><span class="field-unit">万円</span></div>
       <h4>途中でまとまった資金を投資する場合に入力（2回目）</h4>
-      <p>該当部分の説明を削除</p>
+      
       <div class="field-group"><span class="field-label">年齢</span><select id="lump-investment2-age" class="card-input"></select><span class="field-unit">歳</span></div>
       <div class="field-group"><span class="field-label">金額</span><input type="number" id="lump-investment2-amount" class="card-input" placeholder="例：50"><span class="field-unit">万円</span></div>
       <button id="calculate2" class="c-button _shiny">シミュレーション開始</button>
